@@ -95,10 +95,13 @@ def food_collision(snake_body_coordinates, food_coordinate):
     return food_coordinate
 
 
-def check_loss(snake_body_coordinates):
+def check_loss(grid_size, snake_body_coordinates):
     copy_snake_body_coordinates = snake_body_coordinates[:]
     snake_head = copy_snake_body_coordinates.pop()
     if snake_head in copy_snake_body_coordinates:
+        return True
+
+    if snake_head[0] == -1 or snake_head[0] == grid_size or snake_head[1] == -1 or snake_head[1] == grid_size:
         return True
     return False
 
@@ -123,7 +126,6 @@ def display_grid(grid, snake_body_coordinates, food_coordinate, collision, snake
                 column += 1
             row += 1
             grid_display += "\n"
-        #grid_display = grid_display.strip()
         print(grid_display)
 
 
@@ -140,7 +142,7 @@ if __name__ == "__main__":
         get_snake_direction_from_user(direction=direction)
         move_snake(snake_body_coordinates=snake_body_coordinates, direction=direction[-1])
         food = food_collision(snake_body_coordinates=snake_body_coordinates, food_coordinate=food)
-        collision = check_loss(snake_body_coordinates=snake_body_coordinates)
+        collision = check_loss(grid_size, snake_body_coordinates=snake_body_coordinates)
         display_grid(
             grid=grid, 
             snake_body_coordinates=snake_body_coordinates, 
@@ -148,4 +150,3 @@ if __name__ == "__main__":
             collision=collision
         )
         time.sleep(0.1)
-        #print("outside:", direction)

@@ -137,11 +137,11 @@ class TestSnakeGame(unittest.TestCase):
         self.assertEqual(food_coordinate, [6, 6])
 
     def check_loss_without_lose_condition(self):
-        status = snake.check_loss(self.snake_body_coordinates_a_d)
+        status = snake.check_loss(self.grid_size, self.snake_body_coordinates_a_d)
         self.assertFalse(status)
 
     def check_loss_with_lose_condition(self):
-        status = snake.check_loss(self.snake_body_coordinates_a_d)
+        status = snake.check_loss(self.grid_size, self.snake_body_coordinates_a_d)
         self.assertTrue(status)
 
     def test_display_grid(self):
